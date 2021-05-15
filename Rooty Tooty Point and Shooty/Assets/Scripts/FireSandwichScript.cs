@@ -1,33 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FireSandwichScript : MonoBehaviour
 {
     public GameObject projectile;
     public Transform barrelEnd;
-    Camera mainCamera;
 
-    void Start()
-    {
-        mainCamera = Camera.main;
-    }
+    public float force = 20f;
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            int x = Screen.width / 2;
-            int y = Screen.height / 2;
-
-            Ray ray = mainCamera.ScreenPointToRay(new Vector3(x, y));
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                Quaternion hitObjectRotation = Quaternion.LookRotation(hit.normal);
-                //Instantiate(projectile, hit.point, hitObjectRotation);
-                Instantiate(projectile, hit.point, hitObjectRotation);
-            }
+            Shoot();
         }
+    }
+
+    private void Shoot()
+    {
+        GameObject _projectile = Instantiate(projectile, barrelEnd.transform.position, Quaternion.Euler(barrelEnd.transform.forward));
+        _projectile.GetComponent<Rigidbody>().AddForce(barrelEnd.transform.forward * force, ForceMode.Impulse);
+        Destroy(_projectile, 5f);
     }
 }
