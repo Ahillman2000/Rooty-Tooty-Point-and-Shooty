@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3710190333100440047}
   - component: {fileID: 3710190333100440046}
   - component: {fileID: 3710190333100440045}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bullet_impact_terrain_sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3710190333100440044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.001}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.001}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0

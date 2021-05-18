@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8810385030167871351}
   - component: {fileID: 8810385030167871350}
   - component: {fileID: 8810385030167871349}
-  m_Layer: 0
-  m_Name: Bullet_impact
+  m_Layer: 2
+  m_Name: Bullet_impact_terrain_pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
