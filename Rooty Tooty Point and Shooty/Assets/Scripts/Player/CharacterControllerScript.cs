@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterControllerScript : MonoBehaviour
 {
     public CharacterController characterController;
-    GameObject mainCamera;
+    public Camera playerCamera;
 
     public float movement_speed = 10f;
 
@@ -26,7 +26,6 @@ public class CharacterControllerScript : MonoBehaviour
 
     void Start()
     {
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -74,7 +73,7 @@ public class CharacterControllerScript : MonoBehaviour
         mouse_x_rotation -= mouseY;
         mouse_x_rotation = Mathf.Clamp(mouse_x_rotation, min_camera_clamp_value, max_camera_clamp_value);
 
-        mainCamera.transform.localRotation = Quaternion.Euler(mouse_x_rotation, 0f, 0f);
+        playerCamera.transform.localRotation = Quaternion.Euler(mouse_x_rotation, 0f, 0f);
         this.transform.Rotate(Vector3.up * mouseX);
     }
 }

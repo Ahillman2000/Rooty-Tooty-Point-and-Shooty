@@ -3,27 +3,27 @@ using System.Collections;
 
 public class Weapon : MonoBehaviour
 {
+    public Animator animator;
+
     public bool automatic;
     public float damage = 10f;
     public float range = 100f;
     public float fireRate = 15f;
     float nextTimeToFire = 0f;
 
-    Camera mainCamera;
-    public ParticleSystem muzzleFlash;
-    public GameObject impactEffectTerrain;
-
-    public Animator animator;
     public int maxAmmo;
     private int currentAmmoCapacity;
     public float reloadTime;
     private bool isReloading = false;
 
+    public Camera playerCamera;
+    public GameObject bulletSpawn;
+    public ParticleSystem muzzleFlash;
+    public GameObject impactEffectTerrain;
+
     private void Start()
     {
         currentAmmoCapacity = maxAmmo;
-        mainCamera = Camera.main;
-
     }
 
     private void OnEnable()
@@ -69,19 +69,19 @@ public class Weapon : MonoBehaviour
         currentAmmoCapacity--;
 
         RaycastHit hit;
-        if(Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, range))
+        if(Physics.Raycast(bulletSpawn.transform.position, bulletSpawn.transform.forward, out hit, range))
         {
-            Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward * range, Color.red, 5f);
+            Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * range, Color.red, 5f);
             Debug.Log(hit.transform.name);
 
-            Stats enemyStats = hit.transform.GetComponent<Stats>();
-            if(enemyStats != null)
+            Player playerStats = hit.transform.GetComponent<Player>();
+            if(playerStats != null)
             {
-                enemyStats.TakeDamage(damage);
+                playerStats.TakeDamage(damage);
             }
             
             GameObject _impactDecalTerrain = Instantiate(impactEffectTerrain, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(_impactDecalTerrain, 10f);
+            Destroy(_impactDecalTerrain, 2.5f);
         }
     }
 
